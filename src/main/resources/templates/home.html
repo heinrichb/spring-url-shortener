@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Spring URL Shortener</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Spring URL Shortener</h1>
+
+			<!-- Form to Shorten a URL -->
+			<form id="shorten-form" class="form">
+				<input
+					type="text"
+					id="original-url"
+					placeholder="Enter URL to shorten"
+					class="input" />
+				<button type="submit" class="button">Shorten URL</button>
+			</form>
+
+			<!-- Message Display -->
+			<p id="message" class="message hidden"></p>
+
+			<!-- List of Shortened URLs -->
+			<h2>Shortened URLs</h2>
+			<div class="table-container">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Short URL</th>
+							<th>Original URL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="url : ${urls}">
+							<td>
+								<a
+									th:href="@{/{shortUrl}(shortUrl=${url.shortUrl})}"
+									th:text="${url.shortUrl}"
+									class="link"></a>
+							</td>
+							<td>
+								<div class="scrollable">
+									<a
+										th:href="${url.originalUrl}"
+										th:text="${url.originalUrl}"
+										target="_blank"
+										class="link"></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<script>
+			document
+				.getElementById("shorten-form")
+				.addEventListener("submit", async function (event) {
+					event.preventDefault();
+					const input = document.getElementById("original-url");
+					const message = document.getElementById("message");
+					const url = input.value.trim();
+
+					if (!url) {
+						message.textContent = "Please enter a valid URL.";
+						message.classList.remove("hidden", "text-green-400");
+						message.classList.add("text-red-400");
+						return;
+					}
+
+					const response = await fetch("/api/shorten", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ originalUrl: url })
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						message.textContent = `Shortened URL: ${window.location.origin}/${data.shortUrl}`;
+						message.classList.remove("hidden", "text-red-400");
+						message.classList.add("text-green-400");
+						input.value = "";
+						setTimeout(() => window.location.reload(), 1000);
+					} else {
+						message.textContent = "Error shortening URL. Try again.";
+						message.classList.remove("hidden", "text-green-400");
+						message.classList.add("text-red-400");
+					}
+				});
+			document.addEventListener("DOMContentLoaded", function () {
+				document.querySelectorAll("td").forEach((td) => {
+					const scrollable = td.querySelector(".scrollable");
+					if (scrollable && scrollable.scrollWidth > scrollable.clientWidth) {
+						td.style.paddingBottom = "0px";
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,190 @@
+/* Global Styles */
+body {
+	background-color: #1a202c; /* Tailwind bg-gray-900 */
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-family: sans-serif;
+	padding: 1rem;
+}
+
+/* Container */
+.container {
+	width: 100%;
+	max-width: 24rem;
+	padding: 1.5rem;
+	background-color: #2d3748; /* Tailwind bg-gray-800 */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 0.5rem;
+	text-align: center;
+}
+
+/* Headers */
+h1 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+h2 {
+	font-size: 1.25rem;
+	font-weight: bold;
+	margin-top: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+/* Form */
+.form {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+/* Input Field */
+.input {
+	flex-grow: 1;
+	padding: 0.5rem;
+	background-color: #4a5568; /* Tailwind bg-gray-700 */
+	border: 1px solid #2d3748; /* Tailwind border-gray-600 */
+	border-radius: 0.5rem;
+	color: white;
+	outline: none;
+}
+
+/* Button */
+.button {
+	background-color: #48bb78; /* Tailwind bg-green-400 */
+	color: white;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	transition: background 0.2s;
+	white-space: nowrap;
+}
+
+.button:hover {
+	background-color: #38a169; /* Tailwind bg-green-500 */
+}
+
+/* Message */
+.message {
+	margin-top: 1rem;
+	font-weight: bold;
+}
+
+/* Table */
+.table-container {
+	overflow: hidden;
+	border-radius: 0.5rem;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	margin-top: 1rem;
+}
+
+.table {
+	width: 100%;
+	background-color: #4a5568; /* Tailwind bg-gray-700 */
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+.table thead {
+	background-color: #2f855a; /* Tailwind bg-green-700 */
+	color: white;
+}
+
+.table th,
+.table td {
+	padding: 11px;
+	text-align: center;
+	border-bottom: 1px solid #2d3748;
+	height: 2rem;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+/* Adjust Short URL Column Width */
+.table th:first-child,
+.table td:first-child {
+	width: 7rem;
+	min-width: 7rem;
+	max-width: 7rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Fix for long URLs */
+.table td {
+	max-width: 10rem;
+	overflow-x: auto;
+	position: relative;
+	height: 2rem;
+}
+
+/* Scrollbars */
+.scrollable {
+	display: flex;
+	align-items: center;
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+	position: relative;
+	padding-bottom: 0;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+}
+
+/* Absolutely position the scrollbar */
+.scrollable::-webkit-scrollbar {
+	height: 5px;
+	position: absolute;
+	bottom: 0;
+	background: transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0);
+	border-radius: 10px;
+}
+
+/* Scrollbar Appears on Hover */
+.scrollable:hover {
+	scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.scrollable:hover::-webkit-scrollbar {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.scrollable:hover::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.4);
+}
+
+/* Links */
+.link {
+	color: #68d391; /* Tailwind text-green-400 */
+	text-decoration: none;
+	display: inline-block;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+/* Error Page Specific Styling */
+.error-page {
+	margin-top: 1rem;
+	text-align: center;
+	padding: 2rem;
+}
+
+.error-page h1 {
+	color: #f56565; /* Tailwind text-red-500 */
+	margin-bottom: 1rem;
+}
+
+.error-page p {
+	margin-bottom: 1.5rem;
+}
